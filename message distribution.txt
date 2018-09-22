@@ -1,0 +1,23 @@
+message distribution using FIFO
+1: IF mailbox == NULL
+    return 0
+   Else adjust ECB pointer to the head pointer of mailbox
+2: gets the current contents of the mailbox in order to determine  
+    wheter a message is available
+3: IF data == available
+    temporary = get_mailboxData()
+    free(mailbox) in order to empty the current mailbox space
+4: Adjust the head pointer to the next mailbox ECB
+5: Fetch mailbox data from temporary space
+6: inspect the message to classify the destination process 
+   IF message_tag == 1
+      Do point-to-point operation
+   Else if message_tag == 2
+      Do collective operation
+   Else
+      return 0
+7: IF barrier called during collective communication 
+      Initiate barrier
+      Wrap all message from all process 
+8: Wait for success reply from destination process
+9: return 1 for success operation
